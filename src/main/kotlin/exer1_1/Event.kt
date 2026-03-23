@@ -1,9 +1,11 @@
 package org.example.exer1_1
 
+//É de notar que subclasses desta seguinte classe foram declaradas como data class, pois existe a necessidade de serem impressas nos testes realizados. Como a funçao toString já é gerada automaticamente para este tipo de classes, torma-se mais fácil a sua impressão na consola
+//Se as sunbclasses não fossem definidas como data class, a sua visualização como output na consola não seria legível
 sealed class Event {
-    class Login(val username: String, val timestamp: Long): Event()
-    class Purchase(val username: String, val amount: Double, val timestamp: Long): Event()
-    class Logout(val username: String, val timestamp: Long): Event()
+    data class Login(val username: String, val timestamp: Long): Event()
+    data class Purchase(val username: String, val amount: Double, val timestamp: Long): Event()
+    data class Logout(val username: String, val timestamp: Long): Event()
 }
 
 fun List<Event>.filterByUser(username: String): List<Event> {
@@ -20,7 +22,7 @@ fun List<Event>.filterByUser(username: String): List<Event> {
 }
 
 fun List<Event>.totalSpent(username: String): Double {
-    //O metodo filterIsIsntance retorna uma lista que contém todas as instancias de uma determinada classe. Neste caso aplicado retorna uma lista que contém apenas as instancias do evento Purchase
+    //O metodo filterIsIsntance retorna uma lista que contém todas as instâncias de uma determinada classe. Neste caso aplicado retorna uma lista que contém apenas as instancias do evento Purchase
     //Depois disso, usa-se o filter para encontrar apenas os eventos de compra do usuário em questão e por fim soma-se o valor de todas as compras para ter-se o valor total gasto (através do metodo sumOf)
     return this.filterIsInstance<Event.Purchase>().filter { compra -> compra.username == username}.sumOf { compra -> compra.amount }
 }
