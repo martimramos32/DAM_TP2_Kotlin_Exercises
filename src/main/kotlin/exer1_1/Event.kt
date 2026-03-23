@@ -24,3 +24,8 @@ fun List<Event>.totalSpent(username: String): Double {
     //Depois disso, usa-se o filter para encontrar apenas os eventos de compra do usuário em questão e por fim soma-se o valor de todas as compras para ter-se o valor total gasto (através do metodo sumOf)
     return this.filterIsInstance<Event.Purchase>().filter { compra -> compra.username == username}.sumOf { compra -> compra.amount }
 }
+
+fun processEvents(listaEventos: List<Event>, handler: (Event)-> Unit){
+    //Utiliza-se o metodo forEach, pois queremos percorrer todos os eventos da lista e para cada um deles aplicar o handler
+    listaEventos.forEach { evento -> handler(evento) }
+}
