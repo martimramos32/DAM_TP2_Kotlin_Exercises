@@ -28,4 +28,17 @@ class Cache<K: Any, V:Any> {
         // Retorna o número de entradas atualmente armazenadas na cache
         return cache.size
     }
+
+    fun getOrPut(key: K, default: ()-> V): V {
+        val valor = cache[key] // armazena o valor associado à chave fornecida na chamada do metodo
+
+        if (valor != null) { // Se a chave nao for nula na cache, retorna o seu valor associado guardado na variavel denominada "valor"
+
+            return valor
+        }else {
+            val valorDefault = default()
+            cache[key] = default()
+            return valorDefault
+        }
+    }
 }
