@@ -10,7 +10,7 @@ class Cache<K: Any, V:Any> {
         cache[key] = value
     }
 
-    fun  get(key: K): V? {
+    fun  get(key: K): V? { // o uso do "V?" é necessário pois como à partida não se sabe se a chave que o utilizador está a pedir está presente na cache tem de haver a capacidade de tratar de um possivel caso nulo daí o uso do if/else utilizado na função abaixo
         //O método get retorna o valor associado a uma determinada chave, ou null se a chave não estiver presente na cache
         if (cache.containsKey(key)) {
             return cache[key]
@@ -19,4 +19,13 @@ class Cache<K: Any, V:Any> {
         }
     }
 
+    fun evict(key: K) {
+        // Remove uma entrada da cache associada
+        cache.remove(key)
+    }
+
+    fun size(): Int {
+        // Retorna o número de entradas atualmente armazenadas na cache
+        return cache.size
+    }
 }
