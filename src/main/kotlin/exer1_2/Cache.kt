@@ -5,8 +5,18 @@ package org.example.exer1_2
 class Cache<K: Any, V:Any> {
     private val cache : MutableMap<K, V> = mutableMapOf()
 
-    // Método que insere ou reescreve um determinado valor associado a uma determinada chave no map da cache
+    // Método que insere ou reescreve um determinado valor associado a uma determinada chave na cache
     fun put(key: K, value: V) {
         cache[key] = value
     }
+
+    fun  get(key: K): V? {
+        //O método get retorna o valor associado a uma determinada chave, ou null se a chave não estiver presente na cache
+        if (cache.containsKey(key)) {
+            return cache[key]
+        }else{
+            return null
+        }
+    }
+
 }
