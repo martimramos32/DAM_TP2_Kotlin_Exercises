@@ -1,5 +1,7 @@
 package org.example.exer1_2
 
+import jdk.internal.foreign.abi.Binding
+
 //Nesta classe genérica, o K representa a key e o V o value.
 // O uso do Any como upper bound garante que as chaves e os valores não podem ser nulos, o que é importante para a integridade da cache
 class Cache<K: Any, V:Any> {
@@ -52,5 +54,9 @@ class Cache<K: Any, V:Any> {
             return true //retorna true para indicar que a transformação foi bem-sucedida
         }
         return false //retorna false se a chave não existir na cache
+    }
+
+    fun snapshot(): Map<K, V> {
+        return cache.toMap() //retorna uma lista com a cache. esta lista nao pode ser alterada pois o metodo toMap permite esta caracteristica
     }
 }
