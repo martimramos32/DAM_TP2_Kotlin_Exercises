@@ -36,9 +36,21 @@ class Cache<K: Any, V:Any> {
 
             return valor
         }else {
-            val valorDefault = default()
+            val valorDefault = default() //se a chave não existir, chamamos a função lambda para gerar um novo valor
             cache[key] = default()
             return valorDefault
         }
+    }
+
+    fun transform(key: K, action: (V) -> V): Boolean {
+        val valor = cache[key]
+
+        //Se a chave existir, aplicamos a função action ao seu valor associado e atualizamos a cache com esse mesmo valor transformado
+        if (valor != null){
+            val valorAtual = action(valor)
+            cache[key] = valorAtual
+            return true //retorna true para indicar que a transformação foi bem-sucedida
+        }
+        return false //retorna false se a chave não existir na cache
     }
 }
