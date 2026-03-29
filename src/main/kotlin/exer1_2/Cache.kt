@@ -59,4 +59,9 @@ class Cache<K: Any, V:Any> {
     fun snapshot(): Map<K, V> {
         return cache.toMap() //retorna uma lista com a cache. esta lista nao pode ser alterada pois o metodo toMap permite esta caracteristica
     }
+
+    // funcao CHALLENGE
+    fun filterValues(predicate: (V)-> Boolean): Map<K, V> {
+        return cache.filterValues(predicate)
+    }
 }
