@@ -9,6 +9,7 @@ class Pipeline {
         steps.add(par) //acrescentamos este par à lista
     }
 
+    //função responsável por percorrer por ordem todas as entradas por todos as etapas (steps) e retornar o resultado final desta operação
     fun execute(input: List<String>): List<String> {
         var dadosAtuais = input //dados atuais declarados como var pois o seu valor será modificado no futuro
         //é necessario criar a variavel acima porque o Kotlin não deixa "mexer" nos dados recebidos entre parênteses, pois são considerados como constantes (val). isto serve para nao ser possivel destruir ou alterar os dados originais
@@ -17,5 +18,12 @@ class Pipeline {
             dadosAtuais = funcaoTransform(dadosAtuais)
         }
         return dadosAtuais
+    }
+
+    fun describe() {
+        println("Pipeline stages:")
+        for ((index, step) in steps.withIndex()) { //a funcao withIndex permite ver a posição na fila e a etapa
+            println("${index + 1}. ${step.first}") //imprime o nome de cada etapa e numera-a na lista
+        }
     }
 }
