@@ -27,3 +27,11 @@ class Pipeline {
         }
     }
 }
+
+fun  buildPipeline(config: Pipeline.() -> Unit): Pipeline {
+    //O uso da expressão "Pipeline.()" significa que o bloco de código seguinte irá funcionar como se estivesse dentro da classe Pipeline
+    //O uso do "-> Unit" a seguir à expressão anterior, significa que o argumento config não precisará de retornar nada, simplesmente executa uma determinada função sem ter de entregar nada
+    val newPipeline = Pipeline()
+    newPipeline.config() //aplica a função lambda sem retornar nada
+    return newPipeline //retorna a pipeline pronta após sofrer uma determinada configuração
+}
