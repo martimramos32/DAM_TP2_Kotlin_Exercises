@@ -22,6 +22,7 @@ data class Vec2(val x: Double, val y: Double){
     //operador "-" sozinho, ou seja, inverte o sinal do proprio vetor
     operator fun unaryMinus(): Vec2{
         return Vec2(-this.x, -this.y)
+
     }
 
 
