@@ -26,6 +26,27 @@ class Pipeline {
             println("${index + 1}. ${step.first}") //imprime o nome de cada etapa e numera-a na lista
         }
     }
+
+    //CHALLENGES
+
+    fun compose(nameStage1: String, nameStage2: String, newName: String){
+        val etapa1 = steps.find{it.first == nameStage1}
+        val etapa2 = steps.find{it.first == nameStage2}
+
+        if(etapa1 != null && etapa2 != null) {
+            val regra1 = etapa1.second
+            val regra2 = etapa2.second
+
+            //Fundir as duas regras(equuivalente a usar um addThen)
+            //Os dados  entram, passam pela regra1 e o resultado segue para a regra2
+            val regraCombinada: (List<String>) -> List<String> = { entrada -> regra2(regra1(entrada)) }
+
+            //Adicionar a nova etapa à lista
+            addStage(newName, regraCombinada)
+        }else{
+            println("Uma ou nenhuma das etapas foi encontrada na lista.")
+        }
+    }
 }
 
 fun  buildPipeline(config: Pipeline.() -> Unit): Pipeline {
