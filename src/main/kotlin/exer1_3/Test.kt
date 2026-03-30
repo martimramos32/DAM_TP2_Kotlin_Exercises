@@ -39,4 +39,23 @@ fun main(){
     resultadoFinal.forEach { linha ->
         println(linha)
     }
+
+    //----------------------------------------------------------------------------------------------------------------------------------------------------
+    //TESTE DAS FUNÇÕES CHALLENGE IMPLEMENTADAS
+
+    println("\nTESTAR FUNÇÃO COMPOSE")
+    pipeline.compose("Trim", "Filter errors", "Trim e filtrar")
+    pipeline.describe()
+
+    println("\nTESTAR FUNÇÃO FORK")
+    val pipelineInfo = buildPipeline { addStage("Apenas Info"){listaTextos -> listaTextos.filter { linha->linha.contains("INFO") }} }
+
+    val resultadoFork = fork(pipeline, pipelineInfo, logs)
+
+    println("Resultado da Pipeline Original:")
+    resultadoFork.first.forEach { println(it) }
+
+    println("\nResultado da Pipeline Info:")
+    resultadoFork.second.forEach { println(it) }
+
 }
