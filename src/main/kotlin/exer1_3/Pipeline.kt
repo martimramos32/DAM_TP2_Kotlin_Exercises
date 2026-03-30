@@ -37,7 +37,7 @@ class Pipeline {
             val regra1 = etapa1.second
             val regra2 = etapa2.second
 
-            //Fundir as duas regras(equuivalente a usar um addThen)
+            //Fundir as duas regras(equivalente a usar um addThen)
             //Os dados  entram, passam pela regra1 e o resultado segue para a regra2
             val regraCombinada: (List<String>) -> List<String> = { entrada -> regra2(regra1(entrada)) }
 
@@ -55,4 +55,10 @@ fun  buildPipeline(config: Pipeline.() -> Unit): Pipeline {
     val newPipeline = Pipeline()
     newPipeline.config() //aplica a função lambda sem retornar nada
     return newPipeline //retorna a pipeline pronta após sofrer uma determinada configuração
+}
+
+fun fork(pipelineA: Pipeline, pipelineB: Pipeline, input: List<String>): Pair<List<String>, List<String>>{
+    val resultadoA = pipelineA.execute(input) //A pipeline A processa os dados originais
+    val resultadoB = pipelineB.execute(input) //A pipeline B processa os mesmos dados originais
+    return Pair(resultadoA, resultadoB) //retorna ambos os resultados empacotados num par
 }
