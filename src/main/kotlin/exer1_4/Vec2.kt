@@ -43,5 +43,28 @@ data class Vec2(val x: Double, val y: Double): Comparable<Vec2>{
         return tamanhoVetor.compareTo(tamanhoVetorComp)
     }
 
+    //função responsável por calcular a magnitude
+    fun magnitude(): Double{
+        //distancia euclideana
+        return sqrt((this.x * this.x) + (this.y * this.y))
+    }
+
+    //função responsável por calcular o produto escalar
+    fun dot(other: Vec2): Double{
+        return ((this.x * other.x) + (this.y * other.y))
+    }
+
+    //função que retorna um novo vetor unitário na mesma direção
+    fun normalized(): Vec2{
+
+        val tamanho = magnitude() //calcula o tamanho do vetor através da função magnitude criada nesta mesma classe
+
+        //Se o vetor tiver tamanho zero lança uma excessão
+        if (tamanho ==0.0){
+            throw IllegalStateException("Não é possível normalizar um vetor com tamanho 0.")
+        }
+
+        return Vec2(this.x / tamanho, this.y / tamanho) // retorna o novo vetor
+    }
 
 }
