@@ -1,8 +1,12 @@
 package org.example.exer1_4
 
-data class Vec2(val x: Double, val y: Double){
+import kotlin.math.sqrt
 
-    //O operator Overloading permite "ensinar" ao kotlin as regras de como ele se deve comportar quando encontrar um determinado operador entre instancias criadas de classes
+//O uso da expressão "Comparable<Vec2>" foi necessário, pois assim estamos a dizer ao kotlin que uma instância desta classe poode ser comparavél com outra instância desta mesma classe
+//Sem o uso deste contrato, não seria possível comparar instancias desta classe
+data class Vec2(val x: Double, val y: Double): Comparable<Vec2>{
+
+    //O operator Overloading permite "ensinar" ao kotlin as regras de como ele se deve comportar quando encontrar um determinado operador entre instâncias criadas de classes
 
     //operador "+"
     operator fun plus(valor: Vec2): Vec2{
@@ -23,6 +27,20 @@ data class Vec2(val x: Double, val y: Double){
     operator fun unaryMinus(): Vec2{
         return Vec2(-this.x, -this.y)
 
+    }
+
+    //o uso do override cumpre a promessa que foi "assinada" ao usar o contrato Comparable
+    override operator fun compareTo(valor: Vec2): Int {
+        //distancia euclideana do vetor atual
+        val tamanhoVetor = sqrt((this.x * this.x) + (this.y * this.y))
+
+        //distancia euclideana do vetor comparação
+        val tamanhoVetorComp = sqrt((valor.x * valor.x) + (valor.y * valor.y))
+
+        //retorna 0 se os dois vetores forem iguais
+        //retorna um numero positivo se o primeiro for maior que o segundo
+        //retorna um numero negativo se o primeiro for menor que o segundo
+        return tamanhoVetor.compareTo(tamanhoVetorComp)
     }
 
 
