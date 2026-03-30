@@ -67,4 +67,15 @@ data class Vec2(val x: Double, val y: Double): Comparable<Vec2>{
         return Vec2(this.x / tamanho, this.y / tamanho) // retorna o novo vetor
     }
 
+    //overload get operator
+    //se for pedido a posição 0 do vetor, retorna o valor de x
+    //se for pedido a posiçao 1 do vetor, retorna o valor de y
+    operator fun get(i: Int): Double{
+        return when(i){
+            0 -> this.x
+            1 -> this.y
+            else -> throw IndexOutOfBoundsException("Índice inválido.")
+        }
+    }
+
 }
