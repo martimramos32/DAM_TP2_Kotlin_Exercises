@@ -14,6 +14,6 @@ Os exercícios cobrem:
 * Leitura de dados de ficheiros XML (ficheiros de recursos).
 * Lógica de processamento de dados para aplicações Android.
 
-## 🚀 Como Executar
+## Como Executar
 1. Abrir o IntelliJ IDEA.
 2. Executar as funções `main` de cada package (exer1_1, exer1_2, exer1_3 e exer1_4).
